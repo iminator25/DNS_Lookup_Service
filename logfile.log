@@ -1,0 +1,2107 @@
+#### Marking folder assignments/a2_h2u0b_l4f0b ####
+Compiling Program
+
+
+Test 1 #####################################################################
+
+ [/2] Basic query to a name server that is authoritative.
+      (e.g. www.cs.ubc.ca to 142.103.6.6)
+
+STUDENT:
+
+Root DNS server is: 142.103.6.6
+DNSLOOKUP> 
+
+Query ID     11760 www.cs.ubc.ca  A --> 142.103.6.6
+Response ID: 11760 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+www.cs.ubc.ca                  A     3600     142.103.6.5
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 142.103.6.6
+www.cs.ubc.ca                  A     3600     142.103.6.5
+Goodbye!
+
+Test 2 #####################################################################
+
+ [/5] Basic Query that starts at root server and works to an
+      authoritative server in a straightforward path.
+      (e.g. www.cs.ubc.ca to a root name server)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     62990 www.cs.ubc.ca  A --> 199.7.83.42
+Response ID: 62990 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     62990 www.cs.ubc.ca  A --> 199.4.144.2
+Response ID: 62990 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     62990 www.cs.ubc.ca  A --> 137.82.1.1
+Response ID: 62990 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     62990 www.cs.ubc.ca  A --> 137.82.61.120
+Response ID: 62990 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+www.cs.ubc.ca                  A     3600     142.103.6.5
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+www.cs.ubc.ca                  A     3600     142.103.6.5
+Goodbye!
+
+
+Test 3 #####################################################################
+
+ [/5] A basic type query that results in a CNAME and the need to
+      restart the search for the alias. (e.g. prep.ai.mit.edu)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     33100 prep.ai.mit.edu  A --> 199.7.83.42
+Response ID: 33100 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     33100 prep.ai.mit.edu  A --> 192.55.83.30
+Response ID: 33100 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+  Additional Information (11)
+
+
+Query ID     33100 prep.ai.mit.edu  A --> 2.16.40.64
+Response ID: 33100 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (5)
+
+
+Query ID     33100 prep.ai.mit.edu  A --> 18.24.0.120
+Response ID: 33100 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     57896 ftp.gnu.org  A --> 199.7.83.42
+Response ID: 57896 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+  Additional Information (12)
+
+
+Query ID     57896 ftp.gnu.org  A --> 199.19.57.1
+Response ID: 57896 Authoritative = false
+  Answers (0)
+  Nameservers (2)
+  Additional Information (4)
+
+
+Query ID     57896 ftp.gnu.org  A --> 46.43.37.70
+Response ID: 57896 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (4)
+prep.ai.mit.edu                A     300      208.118.235.20
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+prep.ai.mit.edu                A     300      208.118.235.20
+Goodbye!
+
+
+Test 4 #####################################################################
+
+ [/3] A query that returns a name server to use where the name
+      server's address isn't provided. (e.g. www.stanford.edu)
+
+ [/2] If a query returns more than one IP address all IP addresses
+      are printed.
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     11726 www.stanford.edu  A --> 199.7.83.42
+Response ID: 11726 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     11726 www.stanford.edu  A --> 192.55.83.30
+Response ID: 11726 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+  Additional Information (11)
+
+
+Query ID     11726 www.stanford.edu  A --> 208.80.126.13
+Response ID: 11726 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     2764 stanfordhs17.wpengine.com  A --> 199.7.83.42
+Response ID: 2764 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     2764 stanfordhs17.wpengine.com  A --> 192.55.83.30
+Response ID: 2764 Authoritative = false
+  Answers (0)
+  Nameservers (2)
+  Additional Information (4)
+
+
+Query ID     2764 stanfordhs17.wpengine.com  A --> 173.245.58.123
+Response ID: 2764 Authoritative = true
+  Answers (2)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     55080 cluster90-elbwpeel-1jjv8xqi5kd5g-1169217295.us-east-1.elb.amazonaws.com  A --> 199.7.83.42
+Response ID: 55080 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (12)
+
+
+Query ID     55080 cluster90-elbwpeel-1jjv8xqi5kd5g-1169217295.us-east-1.elb.amazonaws.com  A --> 192.41.162.30
+Response ID: 55080 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     55080 cluster90-elbwpeel-1jjv8xqi5kd5g-1169217295.us-east-1.elb.amazonaws.com  A --> 205.251.195.199
+Response ID: 55080 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (0)
+
+
+Query ID     8321 ns-934.awsdns-52.net  A --> 199.7.83.42
+Response ID: 8321 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     8321 ns-934.awsdns-52.net  A --> 192.55.83.30
+Response ID: 8321 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     8321 ns-934.awsdns-52.net  A --> 205.251.199.180
+Response ID: 8321 Authoritative = true
+  Answers (1)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     55080 cluster90-elbwpeel-1jjv8xqi5kd5g-1169217295.us-east-1.elb.amazonaws.com  A --> 205.251.195.166
+Response ID: 55080 Authoritative = true
+  Answers (2)
+  Nameservers (4)
+  Additional Information (0)
+www.stanford.edu               A     60       35.170.147.119
+www.stanford.edu               A     60       34.206.192.89
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+www.stanford.edu               A     60       34.206.192.89
+www.stanford.edu               A     60       35.170.147.119
+Goodbye!
+
+
+Test 5 #####################################################################
+
+ [/2] A complicated lookup series that involves multiple CNAMEs
+      and NS lookups (finance.google.ca)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     20853 finance.google.ca  A --> 199.7.83.42
+Response ID: 20853 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     20853 finance.google.ca  A --> 199.4.144.2
+Response ID: 20853 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (0)
+
+
+Query ID     22694 ns4.google.com  A --> 199.7.83.42
+Response ID: 22694 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     22694 ns4.google.com  A --> 192.55.83.30
+Response ID: 22694 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     22694 ns4.google.com  A --> 216.239.38.10
+Response ID: 22694 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     20853 finance.google.ca  A --> 216.239.38.10
+Response ID: 20853 Authoritative = true
+  Answers (3)
+  Nameservers (0)
+  Additional Information (0)
+finance.google.ca              A     300      172.217.3.206
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+finance.google.ca              A     300      216.58.193.78
+Goodbye!
+
+
+Test 6 #####################################################################
+
+ [/2] A complicated lookup series that involves multiple CNAMEs
+      and NS lookups (www.cbc.ca)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     31556 www.cbc.ca  A --> 199.7.83.42
+Response ID: 31556 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     31556 www.cbc.ca  A --> 199.4.144.2
+Response ID: 31556 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+  Additional Information (0)
+
+
+Query ID     63977 a26-67.akam.net  A --> 199.7.83.42
+Response ID: 63977 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     63977 a26-67.akam.net  A --> 192.55.83.30
+Response ID: 63977 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (12)
+
+
+Query ID     63977 a26-67.akam.net  A --> 2.22.230.67
+Response ID: 63977 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     31556 www.cbc.ca  A --> 23.74.25.67
+Response ID: 31556 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     37935 san.cbc.ca.edgekey.net  A --> 199.7.83.42
+Response ID: 37935 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     37935 san.cbc.ca.edgekey.net  A --> 192.55.83.30
+Response ID: 37935 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (10)
+
+
+Query ID     37935 san.cbc.ca.edgekey.net  A --> 184.26.160.65
+Response ID: 37935 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     24297 e5220.e12.akamaiedge.net  A --> 199.7.83.42
+Response ID: 24297 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     24297 e5220.e12.akamaiedge.net  A --> 192.55.83.30
+Response ID: 24297 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (11)
+
+
+Query ID     24297 e5220.e12.akamaiedge.net  A --> 23.211.133.192
+Response ID: 24297 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+  Additional Information (10)
+
+
+Query ID     24297 e5220.e12.akamaiedge.net  A --> 184.51.100.13
+Response ID: 24297 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+www.cbc.ca                     A     20       23.58.132.31
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+www.cbc.ca                     A     20       23.58.132.31
+Goodbye!
+
+
+Test 7 #####################################################################
+
+ [/3] Can deal with information in the additional information
+      section when not all of it is of interest/use
+      (e.g. groups.yahoo.com)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     644 groups.yahoo.com  A --> 199.7.83.42
+Response ID: 644 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     644 groups.yahoo.com  A --> 192.55.83.30
+Response ID: 644 Authoritative = false
+  Answers (0)
+  Nameservers (5)
+  Additional Information (8)
+
+
+Query ID     644 groups.yahoo.com  A --> 98.138.11.157
+Response ID: 644 Authoritative = true
+  Answers (1)
+  Nameservers (4)
+  Additional Information (2)
+
+
+Query ID     2275 fd-geoycpi-uno.gycpi.b.yahoodns.net  A --> 199.7.83.42
+Response ID: 2275 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     2275 fd-geoycpi-uno.gycpi.b.yahoodns.net  A --> 192.55.83.30
+Response ID: 2275 Authoritative = false
+  Answers (0)
+  Nameservers (5)
+  Additional Information (8)
+
+
+Query ID     2275 fd-geoycpi-uno.gycpi.b.yahoodns.net  A --> 98.138.11.157
+Response ID: 2275 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (2)
+
+
+Query ID     2275 fd-geoycpi-uno.gycpi.b.yahoodns.net  A --> 68.180.130.15
+Response ID: 2275 Authoritative = true
+  Answers (2)
+  Nameservers (0)
+  Additional Information (0)
+groups.yahoo.com               A     300      216.115.100.123
+groups.yahoo.com               A     300      216.115.100.124
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+groups.yahoo.com               A     300      216.115.100.124
+groups.yahoo.com               A     300      216.115.100.123
+Goodbye!
+
+
+Test 8 #####################################################################
+
+ [/2] Adds all resource records retrieved from the server to the
+      cache, starting from an authoritative name server.
+      (check that the student has most of the expected cache entries)
+      (1 mark if they are only caching the final result)
+
+STUDENT:
+
+Root DNS server is: 142.103.6.6
+DNSLOOKUP> 
+
+Query ID     49966 cs.ubc.ca  A --> 142.103.6.6
+Response ID: 49966 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+cs.ubc.ca                      A     3600     142.103.6.5
+DNSLOOKUP> cs.ubc.ca                      A     3600     142.103.6.5
+cs.ubc.ca                      NS    3600     fs1.ugrad.cs.ubc.ca
+cs.ubc.ca                      NS    3600     ns1.cs.ubc.ca
+fs1.ugrad.cs.ubc.ca            A     3600     198.162.35.1
+ns1.cs.ubc.ca                  A     3600     142.103.6.6
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 142.103.6.6
+cs.ubc.ca                      A     3600     142.103.6.5
+cs.ubc.ca                      A     3600     142.103.6.5
+cs.ubc.ca                      NS    3600     ns1.cs.ubc.ca
+cs.ubc.ca                      NS    3600     fs1.ugrad.cs.ubc.ca
+fs1.ugrad.cs.ubc.ca            A     3600     198.162.35.1
+ns1.cs.ubc.ca                  A     3600     142.103.6.6
+Goodbye!
+
+
+Test 9 #####################################################################
+
+ [/1] Adds all resource records retrieved from the server to the
+      cache, starting from a root name server.
+      (check that the student has most of the expected cache entries)
+      (all or nothing)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     10292 cs.ubc.ca  A --> 199.7.83.42
+Response ID: 10292 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     10292 cs.ubc.ca  A --> 199.4.144.2
+Response ID: 10292 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     10292 cs.ubc.ca  A --> 137.82.1.1
+Response ID: 10292 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     10292 cs.ubc.ca  A --> 137.82.61.120
+Response ID: 10292 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+cs.ubc.ca                      A     3600     142.103.6.5
+DNSLOOKUP> any.ca-servers.ca              A     172800   199.4.144.2
+any.ca-servers.ca              AAAA  172800   2001:500:a7:0:0:0:0:2
+c.ca-servers.ca                A     172800   185.159.196.2
+c.ca-servers.ca                AAAA  172800   2620:10a:8053:0:0:0:0:2
+ca                             NS    172800   any.ca-servers.ca
+ca                             NS    172800   c.ca-servers.ca
+ca                             NS    172800   j.ca-servers.ca
+ca                             NS    172800   x.ca-servers.ca
+cs.ubc.ca                      A     3600     142.103.6.5
+cs.ubc.ca                      NS    86400    ns1.cs.ubc.ca
+cs.ubc.ca                      NS    86400    fs1.ugrad.cs.ubc.ca
+cs.ubc.ca                      NS    86400    temp120.cs.ubc.ca
+dns3.ubc.ca                    A     86400    142.103.1.1
+fs1.ugrad.cs.UBC.ca            A     3548     198.162.35.1
+fs1.ugrad.cs.UBC.ca            A     3600     198.162.35.1
+hub.ubc.ca                     A     86400    137.82.1.1
+j.ca-servers.ca                A     172800   198.182.167.1
+j.ca-servers.ca                AAAA  172800   2001:500:83:0:0:0:0:1
+nightbird.eis.utoronto.ca      A     86400    128.100.72.90
+ns1.cs.UBC.ca                  A     3548     142.103.6.6
+ns1.cs.UBC.ca                  A     3600     142.103.6.6
+temp120.cs.ubc.ca              A     86400    137.82.61.120
+ubc.ca                         NS    86400    nightbird.eis.utoronto.ca
+ubc.ca                         NS    86400    dns3.ubc.ca
+ubc.ca                         NS    86400    hub.ubc.ca
+x.ca-servers.ca                A     172800   199.253.250.68
+x.ca-servers.ca                AAAA  172800   2620:10a:80ba:0:0:0:0:68
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+cs.ubc.ca                      A     3600     142.103.6.5
+any.ca-servers.ca              A     172800   199.4.144.2
+any.ca-servers.ca              AAAA  172800   2001:500:a7:0:0:0:0:2
+c.ca-servers.ca                A     172800   185.159.196.2
+c.ca-servers.ca                AAAA  172800   2620:10a:8053:0:0:0:0:2
+ca                             NS    172800   x.ca-servers.ca
+ca                             NS    172800   j.ca-servers.ca
+ca                             NS    172800   c.ca-servers.ca
+ca                             NS    172800   any.ca-servers.ca
+cs.ubc.ca                      A     3600     142.103.6.5
+cs.ubc.ca                      NS    86400    ns1.cs.ubc.ca
+cs.ubc.ca                      NS    86400    temp120.cs.ubc.ca
+cs.ubc.ca                      NS    86400    fs1.ugrad.cs.ubc.ca
+dns3.ubc.ca                    A     86400    142.103.1.1
+fs1.ugrad.cs.UBC.ca            A     3548     198.162.35.1
+fs1.ugrad.cs.UBC.ca            A     3600     198.162.35.1
+hub.ubc.ca                     A     86400    137.82.1.1
+j.ca-servers.ca                A     172800   198.182.167.1
+j.ca-servers.ca                AAAA  172800   2001:500:83:0:0:0:0:1
+nightbird.eis.utoronto.ca      A     86400    128.100.72.90
+ns1.cs.UBC.ca                  A     3600     142.103.6.6
+ns1.cs.UBC.ca                  A     3548     142.103.6.6
+temp120.cs.ubc.ca              A     86400    137.82.61.120
+ubc.ca                         NS    86400    hub.ubc.ca
+ubc.ca                         NS    86400    dns3.ubc.ca
+ubc.ca                         NS    86400    nightbird.eis.utoronto.ca
+x.ca-servers.ca                A     172800   199.253.250.68
+x.ca-servers.ca                AAAA  172800   2620:10a:80ba:0:0:0:0:68
+Goodbye!
+
+
+Test 10 #####################################################################
+
+ [/2] Uses cached data when available (for a regular query).
+      (real execution time for STUDENT should be less than double EXPECTED)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     25488 www.cs.ubc.ca  A --> 199.7.83.42
+Response ID: 25488 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     25488 www.cs.ubc.ca  A --> 199.4.144.2
+Response ID: 25488 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     25488 www.cs.ubc.ca  A --> 137.82.1.1
+Response ID: 25488 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     25488 www.cs.ubc.ca  A --> 137.82.61.120
+Response ID: 25488 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+www.cs.ubc.ca                  A     3600     142.103.6.5
+DNSLOOKUP> 
+
+Query ID     13550 www.cs.ubc.ca  A --> 199.7.83.42
+Response ID: 13550 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     13550 www.cs.ubc.ca  A --> 199.4.144.2
+Response ID: 13550 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     13550 www.cs.ubc.ca  A --> 128.100.72.90
+Response ID: 13550 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     13550 www.cs.ubc.ca  A --> 137.82.61.120
+Response ID: 13550 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+www.cs.ubc.ca                  A     3600     142.103.6.5
+DNSLOOKUP> Goodbye!
+
+real	0m0.804s
+user	0m1.376s
+sys	0m0.065s
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+www.cs.ubc.ca                  A     3600     142.103.6.5
+www.cs.ubc.ca                  A     3600     142.103.6.5
+Goodbye!
+
+real	0m0.385s
+user	0m0.465s
+sys	0m0.052s
+
+
+Test 11 #####################################################################
+
+ [/2] Uses cached data when available (for a CNAME query).
+      (real execution time for STUDENT should be less than double EXPECTED)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     7422 prep.ai.mit.edu  A --> 199.7.83.42
+Response ID: 7422 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     7422 prep.ai.mit.edu  A --> 192.55.83.30
+Response ID: 7422 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+  Additional Information (11)
+
+
+Query ID     7422 prep.ai.mit.edu  A --> 2.16.40.64
+Response ID: 7422 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (5)
+
+
+Query ID     7422 prep.ai.mit.edu  A --> 128.30.2.123
+Response ID: 7422 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     45338 ftp.gnu.org  A --> 199.7.83.42
+Response ID: 45338 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+  Additional Information (12)
+
+
+Query ID     45338 ftp.gnu.org  A --> 199.19.57.1
+Response ID: 45338 Authoritative = false
+  Answers (0)
+  Nameservers (2)
+  Additional Information (4)
+
+
+Query ID     45338 ftp.gnu.org  A --> 46.43.37.70
+Response ID: 45338 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (4)
+prep.ai.mit.edu                A     300      208.118.235.20
+DNSLOOKUP> 
+
+Query ID     64416 prep.ai.mit.edu  A --> 199.7.83.42
+Response ID: 64416 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     64416 prep.ai.mit.edu  A --> 192.55.83.30
+Response ID: 64416 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+  Additional Information (11)
+
+
+Query ID     64416 prep.ai.mit.edu  A --> 2.16.40.64
+Response ID: 64416 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (5)
+
+
+Query ID     64416 prep.ai.mit.edu  A --> 128.30.2.123
+Response ID: 64416 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     62398 ftp.gnu.org  A --> 199.7.83.42
+Response ID: 62398 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+  Additional Information (12)
+
+
+Query ID     62398 ftp.gnu.org  A --> 199.19.57.1
+Response ID: 62398 Authoritative = false
+  Answers (0)
+  Nameservers (2)
+  Additional Information (4)
+
+
+Query ID     62398 ftp.gnu.org  A --> 46.43.37.70
+Response ID: 62398 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (4)
+prep.ai.mit.edu                A     300      208.118.235.20
+DNSLOOKUP> Goodbye!
+
+real	0m1.549s
+user	0m1.598s
+sys	0m0.100s
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+prep.ai.mit.edu                A     300      208.118.235.20
+prep.ai.mit.edu                A     300      208.118.235.20
+Goodbye!
+
+real	0m0.826s
+user	0m0.486s
+sys	0m0.054s
+
+
+Test 12 #####################################################################
+
+ [/2] The TTL reported is the last TTL from the A (or AAAA) record
+      when a CNAME is involved.
+      (the TTL should be 300, not 1800, which is the TTL of the CNAME
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     16760 prep.ai.mit.edu  A --> 199.7.83.42
+Response ID: 16760 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     16760 prep.ai.mit.edu  A --> 192.55.83.30
+Response ID: 16760 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+  Additional Information (11)
+
+
+Query ID     16760 prep.ai.mit.edu  A --> 2.16.40.64
+Response ID: 16760 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (5)
+
+
+Query ID     16760 prep.ai.mit.edu  A --> 128.30.2.123
+Response ID: 16760 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     2763 ftp.gnu.org  A --> 199.7.83.42
+Response ID: 2763 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+  Additional Information (12)
+
+
+Query ID     2763 ftp.gnu.org  A --> 199.19.57.1
+Response ID: 2763 Authoritative = false
+  Answers (0)
+  Nameservers (2)
+  Additional Information (4)
+
+
+Query ID     2763 ftp.gnu.org  A --> 46.43.37.70
+Response ID: 2763 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (4)
+prep.ai.mit.edu                A     300      208.118.235.20
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+prep.ai.mit.edu                A     300      208.118.235.20
+Goodbye!
+
+
+Test 13 #####################################################################
+
+ [/2] Is able to properly request and parse A records.
+      (free marks if they got Test 1 & 2)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     7466 www.cs.ubc.ca  A --> 199.7.83.42
+Response ID: 7466 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     7466 www.cs.ubc.ca  A --> 199.4.144.2
+Response ID: 7466 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     7466 www.cs.ubc.ca  A --> 137.82.1.1
+Response ID: 7466 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     7466 www.cs.ubc.ca  A --> 137.82.61.120
+Response ID: 7466 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+www.cs.ubc.ca                  A     3600     142.103.6.5
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+www.cs.ubc.ca                  A     3600     142.103.6.5
+Goodbye!
+
+
+Test 14 #####################################################################
+
+ [/3] Is able to properly request and parse AAAA records.
+      (1 mark each)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     60878 www.google.ca  AAAA --> 199.7.83.42
+Response ID: 60878 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     60878 www.google.ca  AAAA --> 199.4.144.2
+Response ID: 60878 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (0)
+
+
+Query ID     62917 ns4.google.com  AAAA --> 199.7.83.42
+Response ID: 62917 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     62917 ns4.google.com  AAAA --> 192.55.83.30
+Response ID: 62917 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     62917 ns4.google.com  AAAA --> 216.239.38.10
+Response ID: 62917 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     60878 www.google.ca  AAAA --> 216.239.38.10
+Response ID: 60878 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+www.google.ca                  AAAA  300      2607:f8b0:400a:804:0:0:0:2003
+DNSLOOKUP> Goodbye!
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     10812 www.microsoft.com  AAAA --> 199.7.83.42
+Response ID: 10812 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     10812 www.microsoft.com  AAAA --> 192.55.83.30
+Response ID: 10812 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     10812 www.microsoft.com  AAAA --> 208.76.45.53
+Response ID: 10812 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     9460 www.microsoft.com-c-3.edgekey.net  AAAA --> 199.7.83.42
+Response ID: 9460 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     9460 www.microsoft.com-c-3.edgekey.net  AAAA --> 192.55.83.30
+Response ID: 9460 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (10)
+
+
+Query ID     9460 www.microsoft.com-c-3.edgekey.net  AAAA --> 184.26.160.65
+Response ID: 9460 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     15937 www.microsoft.com-c-3.edgekey.net.globalredir.akadns.net  AAAA --> 199.7.83.42
+Response ID: 15937 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (13)
+
+
+Query ID     15937 www.microsoft.com-c-3.edgekey.net.globalredir.akadns.net  AAAA --> 192.55.83.30
+Response ID: 15937 Authoritative = false
+  Answers (0)
+  Nameservers (10)
+  Additional Information (5)
+
+
+Query ID     15937 www.microsoft.com-c-3.edgekey.net.globalredir.akadns.net  AAAA --> 184.85.248.128
+Response ID: 15937 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     8680 e13678.dspb.akamaiedge.net  AAAA --> 199.7.83.42
+Response ID: 8680 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     8680 e13678.dspb.akamaiedge.net  AAAA --> 192.55.83.30
+Response ID: 8680 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (11)
+
+
+Query ID     8680 e13678.dspb.akamaiedge.net  AAAA --> 23.211.133.192
+Response ID: 8680 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+  Additional Information (9)
+
+
+Query ID     8680 e13678.dspb.akamaiedge.net  AAAA --> 23.59.154.199
+Response ID: 8680 Authoritative = true
+  Answers (2)
+  Nameservers (0)
+  Additional Information (0)
+www.microsoft.com              AAAA  20       2600:140a:c000:29b:0:0:0:356e
+www.microsoft.com              AAAA  20       2600:140a:c000:286:0:0:0:356e
+DNSLOOKUP> Goodbye!
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     25554 www.netflix.com  AAAA --> 199.7.83.42
+Response ID: 25554 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     25554 www.netflix.com  AAAA --> 192.55.83.30
+Response ID: 25554 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (2)
+
+
+Query ID     25554 www.netflix.com  AAAA --> 205.251.194.147
+Response ID: 25554 Authoritative = true
+  Answers (1)
+  Nameservers (4)
+  Additional Information (0)
+
+
+Query ID     57152 www.geo.netflix.com  AAAA --> 199.7.83.42
+Response ID: 57152 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     57152 www.geo.netflix.com  AAAA --> 192.55.83.30
+Response ID: 57152 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (2)
+
+
+Query ID     57152 www.geo.netflix.com  AAAA --> 205.251.194.147
+Response ID: 57152 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (0)
+
+
+Query ID     11715 pdns154.ultradns.org  AAAA --> 199.7.83.42
+Response ID: 11715 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+  Additional Information (12)
+
+
+Query ID     11715 pdns154.ultradns.org  AAAA --> 199.19.57.1
+Response ID: 11715 Authoritative = false
+  Answers (0)
+  Nameservers (10)
+  Additional Information (2)
+
+
+Query ID     11715 pdns154.ultradns.org  AAAA --> 156.154.67.196
+Response ID: 11715 Authoritative = true
+  Answers (1)
+  Nameservers (10)
+  Additional Information (0)
+
+
+Query ID     57152 www.geo.netflix.com  AAAA --> 156.154.67.154
+Response ID: 57152 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     35856 www.us-west-2.prodaa.netflix.com  AAAA --> 199.7.83.42
+Response ID: 35856 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     35856 www.us-west-2.prodaa.netflix.com  AAAA --> 192.55.83.30
+Response ID: 35856 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (2)
+
+
+Query ID     35856 www.us-west-2.prodaa.netflix.com  AAAA --> 205.251.194.147
+Response ID: 35856 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (0)
+
+
+Query ID     27963 ns-749.awsdns-29.net  AAAA --> 199.7.83.42
+Response ID: 27963 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     27963 ns-749.awsdns-29.net  AAAA --> 192.55.83.30
+Response ID: 27963 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     27963 ns-749.awsdns-29.net  AAAA --> 205.251.199.157
+Response ID: 27963 Authoritative = true
+  Answers (1)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     35856 www.us-west-2.prodaa.netflix.com  AAAA --> 205.251.194.237
+Response ID: 35856 Authoritative = true
+  Answers (8)
+  Nameservers (4)
+  Additional Information (0)
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:23a0:b494
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3647:6f22
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:23a6:44b7
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:22d5:9774
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3645:effd
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3647:5d64
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:23a0:707c
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:342a:eb1f
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+www.google.ca                  AAAA  300      2607:f8b0:400a:809:0:0:0:2003
+Goodbye!
+Root DNS server is: 199.7.83.42
+www.microsoft.com              AAAA  20       2600:140a:c000:286:0:0:0:356e
+www.microsoft.com              AAAA  20       2600:140a:c000:29b:0:0:0:356e
+Goodbye!
+Root DNS server is: 199.7.83.42
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3459:8988
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:36ba:3a73
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3644:7cc5
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3644:b807
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3694:303e
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3644:2e8
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3644:8d41
+www.netflix.com                AAAA  60       2620:108:700f:0:0:0:3645:f643
+Goodbye!
+
+
+Test 15 #####################################################################
+
+ [/2] Is able to properly request and parse NS records.
+      (OK if they are only missing 1 record)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     43538 cs.ubc.ca  NS --> 199.7.83.42
+Response ID: 43538 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     43538 cs.ubc.ca  NS --> 199.4.144.2
+Response ID: 43538 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     43538 cs.ubc.ca  NS --> 128.100.72.90
+Response ID: 43538 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     43538 cs.ubc.ca  NS --> 137.82.61.120
+Response ID: 43538 Authoritative = true
+  Answers (1)
+  Nameservers (2)
+  Additional Information (2)
+cs.ubc.ca                      NS    3600     142.103.6.5
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+cs.ubc.ca                      NS    86400    fs1.ugrad.cs.ubc.ca
+cs.ubc.ca                      NS    86400    ns1.cs.ubc.ca
+cs.ubc.ca                      NS    86400    temp120.cs.ubc.ca
+Goodbye!
+
+
+Test 16 #####################################################################
+
+ [/2] Is able to properly request and parse CNAME records.
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     50386 san.cbc.ca.edgekey.net  CNAME --> 199.7.83.42
+Response ID: 50386 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     50386 san.cbc.ca.edgekey.net  CNAME --> 192.55.83.30
+Response ID: 50386 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (10)
+
+
+Query ID     50386 san.cbc.ca.edgekey.net  CNAME --> 184.26.160.65
+Response ID: 50386 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     8818 e5220.e12.akamaiedge.net  CNAME --> 199.7.83.42
+Response ID: 8818 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (14)
+
+
+Query ID     8818 e5220.e12.akamaiedge.net  CNAME --> 192.55.83.30
+Response ID: 8818 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+  Additional Information (11)
+
+
+Query ID     8818 e5220.e12.akamaiedge.net  CNAME --> 23.211.133.192
+Response ID: 8818 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+  Additional Information (10)
+
+
+Query ID     8818 e5220.e12.akamaiedge.net  CNAME --> 184.51.100.13
+Response ID: 8818 Authoritative = true
+  Answers (1)
+  Nameservers (0)
+  Additional Information (0)
+san.cbc.ca.edgekey.net         CNAME 20       23.58.132.31
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+san.cbc.ca.edgekey.net         CNAME 600      e5220.e12.akamaiedge.net
+Goodbye!
+
+
+Test 17 #####################################################################
+
+ [/2] Timeout - nameserver doesn't respond
+      (no exceptions should be thrown)
+
+STUDENT:
+
+Root DNS server is: 192.168.0.0
+DNSLOOKUP> 
+
+Query ID     38716 www.cbc.ca  A --> 192.168.0.0
+../../a2script.sh: line 289: 28683 Done                    echo "lookup www.cbc.ca"
+     28684 Killed                  | /usr/bin/timeout --signal=9 12 java -jar DNSLookupService.jar 192.168.0.0
+
+EXPECTED:
+
+Root DNS server is: 192.168.0.0
+www.cbc.ca                     A     -1       0.0.0.0
+Goodbye!
+
+
+Test 18 #####################################################################
+
+ [/2] Too many queries (e.g. loop1.csproject.org)
+      (process should NOT be killed by the script timeout)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     24424 loop1.csproject.org  A --> 199.7.83.42
+
+
+Query ID     24424 loop1.csproject.org  A --> 199.7.83.42
+loop1.csproject.org            A     -1       0.0.0.0
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+Maximum number of indirection levels reached.
+loop1.csproject.org            A     -1       0.0.0.0
+Goodbye!
+
+
+Test 19 #####################################################################
+
+ [/2] Name does not resolve (e.g. wee.cs.ubc.ca)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     32360 wee.cs.ubc.ca  A --> 199.7.83.42
+
+
+Query ID     32360 wee.cs.ubc.ca  A --> 199.7.83.42
+wee.cs.ubc.ca                  A     -1       0.0.0.0
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+wee.cs.ubc.ca                  A     -1       0.0.0.0
+Goodbye!
+
+
+Test 20 #####################################################################
+
+ [/2] Name does not resolve (e.g. www.cs.ubc.ca AAAA)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     11602 www.cs.ubc.ca  AAAA --> 199.7.83.42
+Response ID: 11602 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+  Additional Information (8)
+
+
+Query ID     11602 www.cs.ubc.ca  AAAA --> 199.4.144.2
+Response ID: 11602 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     11602 www.cs.ubc.ca  AAAA --> 137.82.1.1
+Response ID: 11602 Authoritative = false
+  Answers (0)
+  Nameservers (3)
+  Additional Information (3)
+
+
+Query ID     11602 www.cs.ubc.ca  AAAA --> 137.82.61.120
+Response ID: 11602 Authoritative = true
+  Answers (0)
+  Nameservers (1)
+  Additional Information (0)
+www.cs.ubc.ca                  AAAA  -1       0.0.0.0
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+www.cs.ubc.ca                  AAAA  -1       0.0.0.0
+Goodbye!
+
+
+Test 21 #####################################################################
+
+ [/2] Other types of errors (e.g. .ca)
+
+STUDENT:
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> 
+
+Query ID     16732 .ca  A --> 199.7.83.42
+
+
+Query ID     16732 .ca  A --> 199.7.83.42
+.ca                            A     -1       0.0.0.0
+DNSLOOKUP> Goodbye!
+
+EXPECTED:
+
+Root DNS server is: 199.7.83.42
+.ca                            A     -1       0.0.0.0
+Goodbye!
+
+
+Test 22 #####################################################################
+
+ TRACING
+
+ [/1] Prints query ID, server being queried and FQDN
+ [/1] Query ID is different for every query during a run
+ [/1] Prints Response ID line, with query ID and whether or not this is an authoritative response
+ [/1] Prints the counts for the Answers, Namservers, and Additional Information fields.
+ [/1] Prints A in proper format
+ [/1] Prints AAAA  in proper format
+ [/1] Prints CNAMES in proper format
+ [/1] Prints NS in proper format
+ [/1] Prints type number if not in above
+
+ (Does not have to exactly match the expected trace - just check the above points)
+
+STUDENT: ************************************
+
+Root DNS server is: 199.7.83.42
+DNSLOOKUP> Verbose tracing is now: ON
+DNSLOOKUP> 
+
+Query ID     19265 www.cbc.ca  A --> 199.7.83.42
+Response ID: 19265 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       ca                             172800     NS   c.ca-servers.ca
+       ca                             172800     NS   j.ca-servers.ca
+       ca                             172800     NS   x.ca-servers.ca
+       ca                             172800     NS   any.ca-servers.ca
+  Additional Information (8)
+       c.ca-servers.ca                172800     A    185.159.196.2
+       j.ca-servers.ca                172800     A    198.182.167.1
+       x.ca-servers.ca                172800     A    199.253.250.68
+       any.ca-servers.ca              172800     A    199.4.144.2
+       c.ca-servers.ca                172800     AAAA 2620:10a:8053:0:0:0:0:2
+       j.ca-servers.ca                172800     AAAA 2001:500:83:0:0:0:0:1
+       x.ca-servers.ca                172800     AAAA 2620:10a:80ba:0:0:0:0:68
+       any.ca-servers.ca              172800     AAAA 2001:500:a7:0:0:0:0:2
+
+
+Query ID     19265 www.cbc.ca  A --> 199.4.144.2
+Response ID: 19265 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+       cbc.ca                         86400      NS   a1-29.akam.net
+       cbc.ca                         86400      NS   a4-64.akam.net
+       cbc.ca                         86400      NS   a5-65.akam.net
+       cbc.ca                         86400      NS   a9-66.akam.net
+       cbc.ca                         86400      NS   a14-66.akam.net
+       cbc.ca                         86400      NS   a26-67.akam.net
+  Additional Information (0)
+
+
+Query ID     7697 a26-67.akam.net  A --> 199.7.83.42
+Response ID: 7697 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       net                            172800     NS   a.gtld-servers.net
+       net                            172800     NS   b.gtld-servers.net
+       net                            172800     NS   c.gtld-servers.net
+       net                            172800     NS   d.gtld-servers.net
+       net                            172800     NS   e.gtld-servers.net
+       net                            172800     NS   f.gtld-servers.net
+       net                            172800     NS   g.gtld-servers.net
+       net                            172800     NS   h.gtld-servers.net
+       net                            172800     NS   i.gtld-servers.net
+       net                            172800     NS   j.gtld-servers.net
+       net                            172800     NS   k.gtld-servers.net
+       net                            172800     NS   l.gtld-servers.net
+       net                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+
+
+Query ID     7697 a26-67.akam.net  A --> 192.55.83.30
+Response ID: 7697 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       akam.net                       172800     NS   a9-67.akam.net
+       akam.net                       172800     NS   a18-67.akam.net
+       akam.net                       172800     NS   a5-67.akam.net
+       akam.net                       172800     NS   a3-67.akam.net
+       akam.net                       172800     NS   a28-67.akam.net
+       akam.net                       172800     NS   a22-67.akam.net
+       akam.net                       172800     NS   a7-67.akam.net
+       akam.net                       172800     NS   a11-67.akam.net
+       akam.net                       172800     NS   a1-67.akam.net
+       akam.net                       172800     NS   a12-67.akam.net
+       akam.net                       172800     NS   a13-67.akam.net
+       akam.net                       172800     NS   a4-67.akam.net
+       akam.net                       172800     NS   a6-67.akam.net
+  Additional Information (12)
+       a9-67.akam.net                 172800     A    184.85.248.67
+       a18-67.akam.net                172800     A    95.101.36.67
+       a5-67.akam.net                 172800     A    95.100.168.67
+       a3-67.akam.net                 172800     A    96.7.49.67
+       a28-67.akam.net                172800     A    95.100.173.67
+       a22-67.akam.net                172800     A    23.211.61.67
+       a7-67.akam.net                 172800     A    23.61.199.67
+       a11-67.akam.net                172800     A    84.53.139.67
+       a1-67.akam.net                 172800     A    193.108.91.67
+       a1-67.akam.net                 172800     AAAA 2600:1401:2:0:0:0:0:43
+       a12-67.akam.net                172800     A    184.26.160.67
+       a13-67.akam.net                172800     A    2.22.230.67
+
+
+Query ID     7697 a26-67.akam.net  A --> 2.22.230.67
+Response ID: 7697 Authoritative = true
+  Answers (1)
+       a26-67.akam.net                90000      A    23.74.25.67
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     19265 www.cbc.ca  A --> 23.74.25.67
+Response ID: 19265 Authoritative = true
+  Answers (1)
+       www.cbc.ca                     300        CNAME san.cbc.ca.edgekey.net
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     12902 san.cbc.ca.edgekey.net  A --> 199.7.83.42
+Response ID: 12902 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       net                            172800     NS   a.gtld-servers.net
+       net                            172800     NS   b.gtld-servers.net
+       net                            172800     NS   c.gtld-servers.net
+       net                            172800     NS   d.gtld-servers.net
+       net                            172800     NS   e.gtld-servers.net
+       net                            172800     NS   f.gtld-servers.net
+       net                            172800     NS   g.gtld-servers.net
+       net                            172800     NS   h.gtld-servers.net
+       net                            172800     NS   i.gtld-servers.net
+       net                            172800     NS   j.gtld-servers.net
+       net                            172800     NS   k.gtld-servers.net
+       net                            172800     NS   l.gtld-servers.net
+       net                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+
+
+Query ID     12902 san.cbc.ca.edgekey.net  A --> 192.55.83.30
+Response ID: 12902 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       edgekey.net                    172800     NS   ns1-66.akam.net
+       edgekey.net                    172800     NS   usw6.akam.net
+       edgekey.net                    172800     NS   adns1.akam.net
+       edgekey.net                    172800     NS   ns4-66.akam.net
+       edgekey.net                    172800     NS   ns7-65.akam.net
+       edgekey.net                    172800     NS   ns5-66.akam.net
+       edgekey.net                    172800     NS   a6-65.akam.net
+       edgekey.net                    172800     NS   a12-65.akam.net
+       edgekey.net                    172800     NS   a5-65.akam.net
+       edgekey.net                    172800     NS   a16-65.akam.net
+       edgekey.net                    172800     NS   a18-65.akam.net
+       edgekey.net                    172800     NS   a28-65.akam.net
+       edgekey.net                    172800     NS   a13-65.akam.net
+  Additional Information (10)
+       ns1-66.akam.net                172800     A    193.108.91.66
+       ns1-66.akam.net                172800     AAAA 2600:1401:2:0:0:0:0:42
+       usw6.akam.net                  172800     A    23.61.199.64
+       adns1.akam.net                 172800     A    96.7.50.66
+       ns4-66.akam.net                172800     A    84.53.139.66
+       ns7-65.akam.net                172800     A    96.7.49.65
+       ns5-66.akam.net                172800     A    184.85.248.66
+       a6-65.akam.net                 172800     A    23.211.133.65
+       a6-65.akam.net                 172800     AAAA 2600:1401:1:0:0:0:0:41
+       a12-65.akam.net                172800     A    184.26.160.65
+
+
+Query ID     12902 san.cbc.ca.edgekey.net  A --> 184.26.160.65
+Response ID: 12902 Authoritative = true
+  Answers (1)
+       san.cbc.ca.edgekey.net         600        CNAME e5220.e12.akamaiedge.net
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     20198 e5220.e12.akamaiedge.net  A --> 199.7.83.42
+Response ID: 20198 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       net                            172800     NS   a.gtld-servers.net
+       net                            172800     NS   b.gtld-servers.net
+       net                            172800     NS   c.gtld-servers.net
+       net                            172800     NS   d.gtld-servers.net
+       net                            172800     NS   e.gtld-servers.net
+       net                            172800     NS   f.gtld-servers.net
+       net                            172800     NS   g.gtld-servers.net
+       net                            172800     NS   h.gtld-servers.net
+       net                            172800     NS   i.gtld-servers.net
+       net                            172800     NS   j.gtld-servers.net
+       net                            172800     NS   k.gtld-servers.net
+       net                            172800     NS   l.gtld-servers.net
+       net                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+
+
+Query ID     20198 e5220.e12.akamaiedge.net  A --> 192.55.83.30
+Response ID: 20198 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       akamaiedge.net                 172800     NS   la1.akamaiedge.net
+       akamaiedge.net                 172800     NS   la3.akamaiedge.net
+       akamaiedge.net                 172800     NS   lar2.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns3-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns6-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns7-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns5-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   a12-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a28-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a6-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a1-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a13-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a11-192.akamaiedge.net
+  Additional Information (11)
+       la1.akamaiedge.net             172800     A    184.26.161.192
+       la3.akamaiedge.net             172800     A    95.101.36.192
+       lar2.akamaiedge.net            172800     A    2.16.40.192
+       ns3-194.akamaiedge.net         172800     A    23.61.199.194
+       ns3-194.akamaiedge.net         172800     AAAA 2600:1406:32:0:0:0:0:c2
+       ns6-194.akamaiedge.net         172800     A    95.100.168.194
+       ns7-194.akamaiedge.net         172800     A    96.7.49.194
+       ns5-194.akamaiedge.net         172800     A    184.85.248.194
+       a12-192.akamaiedge.net         172800     A    184.26.160.192
+       a28-192.akamaiedge.net         172800     A    95.100.173.192
+       a6-192.akamaiedge.net          172800     A    23.211.133.192
+
+
+Query ID     20198 e5220.e12.akamaiedge.net  A --> 23.211.133.192
+Response ID: 20198 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+       e12.akamaiedge.net             4000       NS   n4e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n2e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n0e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n7e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n1e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n6e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n5e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n3e12.akamaiedge.net
+  Additional Information (10)
+       n7e12.akamaiedge.net           4000       A    184.50.27.230
+       n1e12.akamaiedge.net           4000       AAAA 2600:1406:1c:f000:902d:9b9b:5d39:ba8c
+       n0e12.akamaiedge.net           4000       AAAA 2600:1480:e800:0:0:0:0:c0
+       n0e12.akamaiedge.net           4000       A    88.221.81.192
+       n4e12.akamaiedge.net           4000       A    184.51.100.6
+       n5e12.akamaiedge.net           4000       A    184.51.100.13
+       n3e12.akamaiedge.net           4000       A    184.51.100.15
+       n2e12.akamaiedge.net           4000       A    63.141.195.102
+       n1e12.akamaiedge.net           4000       A    184.51.100.4
+       n6e12.akamaiedge.net           4000       A    63.141.195.110
+
+
+Query ID     20198 e5220.e12.akamaiedge.net  A --> 63.141.195.110
+Response ID: 20198 Authoritative = true
+  Answers (1)
+       e5220.e12.akamaiedge.net       20         A    23.58.132.31
+  Nameservers (0)
+  Additional Information (0)
+www.cbc.ca                     A     20       23.58.132.31
+DNSLOOKUP> Goodbye!
+
+EXPECTED: ***********************************
+
+Root DNS server is: 199.7.83.42
+Verbose tracing is now: ON
+
+
+Query ID     4081 www.cbc.ca  A --> 199.7.83.42
+Response ID: 4081 Authoritative = false
+  Answers (0)
+  Nameservers (4)
+       ca                             172800     NS   c.ca-servers.ca
+       ca                             172800     NS   j.ca-servers.ca
+       ca                             172800     NS   x.ca-servers.ca
+       ca                             172800     NS   any.ca-servers.ca
+  Additional Information (8)
+       c.ca-servers.ca                172800     A    185.159.196.2
+       j.ca-servers.ca                172800     A    198.182.167.1
+       x.ca-servers.ca                172800     A    199.253.250.68
+       any.ca-servers.ca              172800     A    199.4.144.2
+       c.ca-servers.ca                172800     AAAA 2620:10a:8053:0:0:0:0:2
+       j.ca-servers.ca                172800     AAAA 2001:500:83:0:0:0:0:1
+       x.ca-servers.ca                172800     AAAA 2620:10a:80ba:0:0:0:0:68
+       any.ca-servers.ca              172800     AAAA 2001:500:a7:0:0:0:0:2
+
+
+Query ID     6406 www.cbc.ca  A --> 185.159.196.2
+Response ID: 6406 Authoritative = false
+  Answers (0)
+  Nameservers (6)
+       cbc.ca                         86400      NS   a1-29.akam.net
+       cbc.ca                         86400      NS   a4-64.akam.net
+       cbc.ca                         86400      NS   a5-65.akam.net
+       cbc.ca                         86400      NS   a9-66.akam.net
+       cbc.ca                         86400      NS   a14-66.akam.net
+       cbc.ca                         86400      NS   a26-67.akam.net
+  Additional Information (0)
+
+
+Query ID     60777 a1-29.akam.net  A --> 199.7.83.42
+Response ID: 60777 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       net                            172800     NS   a.gtld-servers.net
+       net                            172800     NS   b.gtld-servers.net
+       net                            172800     NS   c.gtld-servers.net
+       net                            172800     NS   d.gtld-servers.net
+       net                            172800     NS   e.gtld-servers.net
+       net                            172800     NS   f.gtld-servers.net
+       net                            172800     NS   g.gtld-servers.net
+       net                            172800     NS   h.gtld-servers.net
+       net                            172800     NS   i.gtld-servers.net
+       net                            172800     NS   j.gtld-servers.net
+       net                            172800     NS   k.gtld-servers.net
+       net                            172800     NS   l.gtld-servers.net
+       net                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+
+
+Query ID     10206 a1-29.akam.net  A --> 192.5.6.30
+Response ID: 10206 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       akam.net                       172800     NS   a9-67.akam.net
+       akam.net                       172800     NS   a18-67.akam.net
+       akam.net                       172800     NS   a5-67.akam.net
+       akam.net                       172800     NS   a3-67.akam.net
+       akam.net                       172800     NS   a28-67.akam.net
+       akam.net                       172800     NS   a22-67.akam.net
+       akam.net                       172800     NS   a7-67.akam.net
+       akam.net                       172800     NS   a11-67.akam.net
+       akam.net                       172800     NS   a1-67.akam.net
+       akam.net                       172800     NS   a12-67.akam.net
+       akam.net                       172800     NS   a13-67.akam.net
+       akam.net                       172800     NS   a4-67.akam.net
+       akam.net                       172800     NS   a6-67.akam.net
+  Additional Information (12)
+       a9-67.akam.net                 172800     A    184.85.248.67
+       a18-67.akam.net                172800     A    95.101.36.67
+       a5-67.akam.net                 172800     A    95.100.168.67
+       a3-67.akam.net                 172800     A    96.7.49.67
+       a28-67.akam.net                172800     A    95.100.173.67
+       a22-67.akam.net                172800     A    23.211.61.67
+       a7-67.akam.net                 172800     A    23.61.199.67
+       a11-67.akam.net                172800     A    84.53.139.67
+       a1-67.akam.net                 172800     A    193.108.91.67
+       a1-67.akam.net                 172800     AAAA 2600:1401:2:0:0:0:0:43
+       a12-67.akam.net                172800     A    184.26.160.67
+       a13-67.akam.net                172800     A    2.22.230.67
+
+
+Query ID     46447 a1-29.akam.net  A --> 184.85.248.67
+Response ID: 46447 Authoritative = true
+  Answers (1)
+       a1-29.akam.net                 90000      A    193.108.91.29
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     47543 www.cbc.ca  A --> 193.108.91.29
+Response ID: 47543 Authoritative = true
+  Answers (1)
+       www.cbc.ca                     300        CNAME san.cbc.ca.edgekey.net
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     12927 san.cbc.ca.edgekey.net  A --> 199.7.83.42
+Response ID: 12927 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       net                            172800     NS   a.gtld-servers.net
+       net                            172800     NS   b.gtld-servers.net
+       net                            172800     NS   c.gtld-servers.net
+       net                            172800     NS   d.gtld-servers.net
+       net                            172800     NS   e.gtld-servers.net
+       net                            172800     NS   f.gtld-servers.net
+       net                            172800     NS   g.gtld-servers.net
+       net                            172800     NS   h.gtld-servers.net
+       net                            172800     NS   i.gtld-servers.net
+       net                            172800     NS   j.gtld-servers.net
+       net                            172800     NS   k.gtld-servers.net
+       net                            172800     NS   l.gtld-servers.net
+       net                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+
+
+Query ID     43429 san.cbc.ca.edgekey.net  A --> 192.5.6.30
+Response ID: 43429 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       edgekey.net                    172800     NS   ns1-66.akam.net
+       edgekey.net                    172800     NS   usw6.akam.net
+       edgekey.net                    172800     NS   adns1.akam.net
+       edgekey.net                    172800     NS   ns4-66.akam.net
+       edgekey.net                    172800     NS   ns7-65.akam.net
+       edgekey.net                    172800     NS   ns5-66.akam.net
+       edgekey.net                    172800     NS   a6-65.akam.net
+       edgekey.net                    172800     NS   a12-65.akam.net
+       edgekey.net                    172800     NS   a5-65.akam.net
+       edgekey.net                    172800     NS   a16-65.akam.net
+       edgekey.net                    172800     NS   a18-65.akam.net
+       edgekey.net                    172800     NS   a28-65.akam.net
+       edgekey.net                    172800     NS   a13-65.akam.net
+  Additional Information (10)
+       ns1-66.akam.net                172800     A    193.108.91.66
+       ns1-66.akam.net                172800     AAAA 2600:1401:2:0:0:0:0:42
+       usw6.akam.net                  172800     A    23.61.199.64
+       adns1.akam.net                 172800     A    96.7.50.66
+       ns4-66.akam.net                172800     A    84.53.139.66
+       ns7-65.akam.net                172800     A    96.7.49.65
+       ns5-66.akam.net                172800     A    184.85.248.66
+       a6-65.akam.net                 172800     A    23.211.133.65
+       a6-65.akam.net                 172800     AAAA 2600:1401:1:0:0:0:0:41
+       a12-65.akam.net                172800     A    184.26.160.65
+
+
+Query ID     5480 san.cbc.ca.edgekey.net  A --> 193.108.91.66
+Response ID: 5480 Authoritative = true
+  Answers (1)
+       san.cbc.ca.edgekey.net         600        CNAME e5220.e12.akamaiedge.net
+  Nameservers (0)
+  Additional Information (0)
+
+
+Query ID     16580 e5220.e12.akamaiedge.net  A --> 199.7.83.42
+Response ID: 16580 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       net                            172800     NS   a.gtld-servers.net
+       net                            172800     NS   b.gtld-servers.net
+       net                            172800     NS   c.gtld-servers.net
+       net                            172800     NS   d.gtld-servers.net
+       net                            172800     NS   e.gtld-servers.net
+       net                            172800     NS   f.gtld-servers.net
+       net                            172800     NS   g.gtld-servers.net
+       net                            172800     NS   h.gtld-servers.net
+       net                            172800     NS   i.gtld-servers.net
+       net                            172800     NS   j.gtld-servers.net
+       net                            172800     NS   k.gtld-servers.net
+       net                            172800     NS   l.gtld-servers.net
+       net                            172800     NS   m.gtld-servers.net
+  Additional Information (14)
+       a.gtld-servers.net             172800     A    192.5.6.30
+       b.gtld-servers.net             172800     A    192.33.14.30
+       c.gtld-servers.net             172800     A    192.26.92.30
+       d.gtld-servers.net             172800     A    192.31.80.30
+       e.gtld-servers.net             172800     A    192.12.94.30
+       f.gtld-servers.net             172800     A    192.35.51.30
+       g.gtld-servers.net             172800     A    192.42.93.30
+       h.gtld-servers.net             172800     A    192.54.112.30
+       i.gtld-servers.net             172800     A    192.43.172.30
+       j.gtld-servers.net             172800     A    192.48.79.30
+       k.gtld-servers.net             172800     A    192.52.178.30
+       l.gtld-servers.net             172800     A    192.41.162.30
+       m.gtld-servers.net             172800     A    192.55.83.30
+       a.gtld-servers.net             172800     AAAA 2001:503:a83e:0:0:0:2:30
+
+
+Query ID     10920 e5220.e12.akamaiedge.net  A --> 192.5.6.30
+Response ID: 10920 Authoritative = false
+  Answers (0)
+  Nameservers (13)
+       akamaiedge.net                 172800     NS   la1.akamaiedge.net
+       akamaiedge.net                 172800     NS   la3.akamaiedge.net
+       akamaiedge.net                 172800     NS   lar2.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns3-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns6-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns7-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   ns5-194.akamaiedge.net
+       akamaiedge.net                 172800     NS   a12-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a28-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a6-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a1-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a13-192.akamaiedge.net
+       akamaiedge.net                 172800     NS   a11-192.akamaiedge.net
+  Additional Information (11)
+       la1.akamaiedge.net             172800     A    184.26.161.192
+       la3.akamaiedge.net             172800     A    95.101.36.192
+       lar2.akamaiedge.net            172800     A    2.16.40.192
+       ns3-194.akamaiedge.net         172800     A    23.61.199.194
+       ns3-194.akamaiedge.net         172800     AAAA 2600:1406:32:0:0:0:0:c2
+       ns6-194.akamaiedge.net         172800     A    95.100.168.194
+       ns7-194.akamaiedge.net         172800     A    96.7.49.194
+       ns5-194.akamaiedge.net         172800     A    184.85.248.194
+       a12-192.akamaiedge.net         172800     A    184.26.160.192
+       a28-192.akamaiedge.net         172800     A    95.100.173.192
+       a6-192.akamaiedge.net          172800     A    23.211.133.192
+
+
+Query ID     64779 e5220.e12.akamaiedge.net  A --> 184.26.161.192
+Response ID: 64779 Authoritative = false
+  Answers (0)
+  Nameservers (8)
+       e12.akamaiedge.net             4000       NS   n7e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n1e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n2e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n0e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n4e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n6e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n3e12.akamaiedge.net
+       e12.akamaiedge.net             4000       NS   n5e12.akamaiedge.net
+  Additional Information (10)
+       n7e12.akamaiedge.net           4000       A    184.50.27.230
+       n3e12.akamaiedge.net           4000       A    184.51.100.15
+       n1e12.akamaiedge.net           4000       AAAA 2600:1406:1c:f000:902d:9b9b:5d39:ba8c
+       n4e12.akamaiedge.net           4000       A    184.51.100.6
+       n6e12.akamaiedge.net           4000       A    63.141.195.110
+       n2e12.akamaiedge.net           4000       A    63.141.195.102
+       n0e12.akamaiedge.net           4000       A    88.221.81.192
+       n1e12.akamaiedge.net           4000       A    184.51.100.4
+       n0e12.akamaiedge.net           4000       AAAA 2600:1480:e800:0:0:0:0:c0
+       n5e12.akamaiedge.net           4000       A    184.51.100.13
+
+
+Query ID     19603 e5220.e12.akamaiedge.net  A --> 184.50.27.230
+Response ID: 19603 Authoritative = true
+  Answers (1)
+       e5220.e12.akamaiedge.net       20         A    23.58.132.31
+  Nameservers (0)
+  Additional Information (0)
+www.cbc.ca                     A     20       23.58.132.31
+Goodbye!
+
+
+
