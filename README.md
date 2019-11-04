@@ -1,4 +1,4 @@
-   This program was built in intellij and when running it I would recommed to go through that software.
+   This program was built in intellij and when running it I would recommed to go through that IDE.
    
    If you are having a problem running it make sure to edit the run configuratins and add the following line 
    in the "Program arguments:" field. "a.root-servers.net". Once that is done it should work fine. 
